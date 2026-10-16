@@ -33,3 +33,10 @@ export function formatResult(value) {
   }
   return roundedValue.toString();
 }
+
+const state = {
+  display: "0", // The current value shown on the calculator display
+  firstOperand: null, // The first operand for the current operation
+  operator: null, // The operator for the current operation
+  waitingForSecondOperand: false, // Flag to indicate if the calculator is waiting for the second operand
+};
