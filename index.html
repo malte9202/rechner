@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rechner</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="app.js"></script>
+  </head>
+
+  <body>
+    <main class="calculator">
+      <h1 class="visually-hidden">Rechner</h1>
+
+      <div class="screen">
+        <p class="pending" id="pending" aria-hidden="true"></p>
+        <output class="display" id="display" aria-live="polite">0</output>
+      </div>
+
+      <div class="keys" id="keys">
+        <button type="button" data-key="C" class="key key-clear" aria-label="Alles löschen">C</button>
+        <button type="button" data-key="/" class="key key-operator" aria-label="geteilt">÷</button>
+
+        <button type="button" data-key="7" class="key">7</button>
+        <button type="button" data-key="8" class="key">8</button>
+        <button type="button" data-key="9" class="key">9</button>
+        <button type="button" data-key="*" class="key key-operator" aria-label="mal">×</button>
+
+        <button type="button" data-key="4" class="key">4</button>
+        <button type="button" data-key="5" class="key">5</button>
+        <button type="button" data-key="6" class="key">6</button>
+        <button type="button" data-key="-" class="key key-operator" aria-label="minus">−</button>
+
+        <button type="button" data-key="1" class="key">1</button>
+        <button type="button" data-key="2" class="key">2</button>
+        <button type="button" data-key="3" class="key">3</button>
+        <button type="button" data-key="+" class="key key-operator" aria-label="plus">+</button>
+
+        <button type="button" data-key="0" class="key key-zero">0</button>
+        <button type="button" data-key="." class="key" aria-label="Komma">,</button>
+        <button type="button" data-key="=" class="key key-equals" aria-label="gleich">=</button>
+      </div>
+    </main>
+  </body>
+</html>
