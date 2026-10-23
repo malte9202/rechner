@@ -20,7 +20,10 @@ function toGerman(text) {
 function render() {
   displayEl.textContent = toGerman(state.display);
   displayEl.classList.toggle("is-error", state.hasError);
-  displayEl.classList.toggle("is-long", !state.hasError && state.display.length > 10);
+  displayEl.classList.toggle(
+    "is-long",
+    !state.hasError && state.display.length > 10,
+  );
 
   pendingEl.textContent =
     state.operator === null
@@ -50,6 +53,7 @@ const KEYBOARD_ALIASES = {
   Delete: "C",
   x: "*",
   X: "*",
+  Backspace: "B",
 };
 
 document.addEventListener("keydown", (event) => {
@@ -57,7 +61,9 @@ document.addEventListener("keydown", (event) => {
   if (event.metaKey || event.ctrlKey || event.altKey) return;
 
   const key = KEYBOARD_ALIASES[event.key] ?? event.key;
-  const known = /^[0-9]$/.test(key) || [".", "+", "-", "*", "/", "=", "C"].includes(key);
+  const known =
+    /^[0-9]$/.test(key) ||
+    [".", "+", "-", "*", "/", "=", "C", "B"].includes(key);
   if (!known) return;
 
   // Verhindert z. B., dass Enter einen fokussierten Button zusätzlich anklickt

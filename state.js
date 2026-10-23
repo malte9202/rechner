@@ -56,6 +56,22 @@ export function inputDecimal(state) {
   };
 }
 
+export function inputBackspace(state) {
+  // Regel 1: nichts zu löschen, wenn der Rechner auf den zweiten Operanden wartet
+  if (state.waitingForSecondOperand) {
+    return state;
+  }
+
+  // Regel 2: letztes Zeichen entfernen
+  const shortened = state.display.slice(0, -1);
+
+  // Regel 3: ...
+  return {
+    ...state,
+    display: shortened || "0",
+  };
+}
+
 export function inputOperator(state, nextOperator) {
   // Nach einem Fehler gibt es nichts, womit man weiterrechnen könnte.
   if (state.hasError) {
@@ -139,5 +155,6 @@ export function handleKey(state, key) {
   if (["+", "-", "*", "/"].includes(key)) return inputOperator(state, key);
   if (key === "=") return inputEquals(state);
   if (key === "C") return clearAll();
+  if (key === "B") return inputBackspace(state);
   return state;
 }

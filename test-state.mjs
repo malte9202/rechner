@@ -1,9 +1,4 @@
-import {
-  initialState,
-  inputDigit,
-  inputDecimal,
-  handleKey,
-} from "./state.js";
+import { initialState, inputDigit, inputDecimal, handleKey } from "./state.js";
 
 let failed = 0;
 
@@ -193,24 +188,52 @@ const keyCases = [
   { keys: ".5+.5=", expected: "1", name: ".5 + .5 = 1 (Punkt am Anfang)" },
   { keys: "2-5=", expected: "-3", name: "negatives Ergebnis" },
   { keys: "1+2+3=", expected: "6", name: "Verkettung: 1 + 2 + 3 = 6" },
-  { keys: "1+2+", expected: "3", name: "Zwischenergebnis nach zweitem Operator" },
+  {
+    keys: "1+2+",
+    expected: "3",
+    name: "Zwischenergebnis nach zweitem Operator",
+  },
   { keys: "5+*2=", expected: "10", name: "zwei Operatoren: der letzte gilt" },
-  { keys: "5-2=7", expected: "7", name: "Ziffer nach '=' beginnt neue Rechnung" },
+  {
+    keys: "5-2=7",
+    expected: "7",
+    name: "Ziffer nach '=' beginnt neue Rechnung",
+  },
   { keys: "5-2=*4=", expected: "12", name: "mit dem Ergebnis weiterrechnen" },
   { keys: "5=", expected: "5", name: "'=' ohne Operator ändert nichts" },
-  { keys: "5+=", expected: "10", name: "5 + = rechnet mit der Anzeige (5 + 5)" },
+  {
+    keys: "5+=",
+    expected: "10",
+    name: "5 + = rechnet mit der Anzeige (5 + 5)",
+  },
   { keys: "5+3=", expected: "8", name: "Ergebnis steht auf der Anzeige" },
   { keys: "5+3=C", expected: "0", name: "C setzt alles zurück" },
-  { keys: "5+3C2=", expected: "2", name: "nach C ist keine Rechnung mehr offen" },
+  {
+    keys: "5+3C2=",
+    expected: "2",
+    name: "nach C ist keine Rechnung mehr offen",
+  },
   { keys: "1.5+1.5=", expected: "3", name: "Dezimalzahlen" },
   { keys: "1..5", expected: "1.5", name: "doppelter Punkt wird ignoriert" },
-  { keys: "007", expected: "7", name: "führende Nullen werden nicht angehängt" },
+  {
+    keys: "007",
+    expected: "7",
+    name: "führende Nullen werden nicht angehängt",
+  },
   { keys: "5/0=", expected: ERROR, name: "Division durch null mit '='" },
   { keys: "5/0+", expected: ERROR, name: "Division durch null in der Kette" },
-  { keys: "5/0=+", expected: ERROR, name: "Operator nach Fehler wird ignoriert" },
+  {
+    keys: "5/0=+",
+    expected: ERROR,
+    name: "Operator nach Fehler wird ignoriert",
+  },
   { keys: "5/0==", expected: ERROR, name: "'=' nach Fehler wird ignoriert" },
   { keys: "5/0=7", expected: "7", name: "Ziffer nach Fehler beginnt neu" },
-  { keys: "5/0=7+1=", expected: "8", name: "Rechnen nach Fehler funktioniert wieder" },
+  {
+    keys: "5/0=7+1=",
+    expected: "8",
+    name: "Rechnen nach Fehler funktioniert wieder",
+  },
   { keys: "5/0=.", expected: "0.", name: "Punkt nach Fehler beginnt neu" },
   { keys: "5/0=C", expected: "0", name: "C nach Fehler" },
   {
@@ -221,6 +244,25 @@ const keyCases = [
   { keys: "1/3=", expected: "0.333333333333", name: "1 / 3 auf 12 Stellen" },
   { keys: "0.1+0.2+0.3=", expected: "0.6", name: "0.1 + 0.2 + 0.3 = 0.6" },
   { keys: "x", expected: "0", name: "unbekannte Taste wird ignoriert" },
+  {
+    keys: "123B",
+    expected: "12",
+    name: "Backspace entfernt die letzte Ziffer",
+  },
+  { keys: "5B", expected: "0", name: "wird die Anzeige leer, steht 0 da" },
+  { keys: "B", expected: "0", name: "auf 0 ändert Backspace nichts" },
+  { keys: "1.5B", expected: "1.", name: "letzte Ziffer entfernen" },
+  { keys: "1.B", expected: "1", name: "auch der Punkt gelöscht werden" },
+  {
+    keys: "12+B",
+    expected: "12",
+    name: "Nach einem Operator gibt es nichts zu löschen",
+  },
+  {
+    keys: "5-2=B",
+    expected: "3",
+    name: "ein Ergebnis löscht man nicht Ziffer für Ziffer",
+  },
 ];
 
 for (const { keys, expected, name } of keyCases) {
